@@ -1,0 +1,26 @@
+{
+  "name": "onyx-docs",
+  "version": "1.0.0",
+  "description": "Documentation for open-source Onyx Framework components",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev",
+    "build": "vuepress build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onyxframework/docs.git"
+  },
+  "author": "Vlad Faust <mail@vladfaust.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/onyxframework/docs/issues"
+  },
+  "homepage": "https://github.com/onyxframework/docs#readme",
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.0.0-alpha.40",
+    "@vuepress/plugin-clean-urls": "^1.0.0-alpha.40",
+    "@vuepress/plugin-google-analytics": "^1.0.0-alpha.40",
+    "vuepress": "^1.0.0-alpha.40"
+  }
+}
