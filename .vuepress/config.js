@@ -13,6 +13,11 @@ module.exports = {
       '@vuepress/google-analytics', {
         ga: 'UA-135279567-3'
       }
+    ],
+    [
+      'sitemap', {
+        hostname: 'https://docs.onyxframework.org'
+      }
     ]
   ],
   themeConfig: {
