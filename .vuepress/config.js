@@ -5,11 +5,6 @@ module.exports = {
   plugins: [
     '@vuepress/back-to-top',
     [
-      '@vuepress/clean-urls', {
-        normalSuffix: '/'
-      }
-    ],
-    [
       '@vuepress/google-analytics', {
         ga: 'UA-135279567-3'
       }
