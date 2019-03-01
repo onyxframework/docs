@@ -23,6 +23,7 @@ module.exports = {
   themeConfig: {
     lastUpdated: 'Last Updated',
     repo: 'onyxframework/docs',
+    editLinks: true,
     nav: [
       { text: 'Home', link: '/' },
       { text: 'REST', link: '/rest/' },
