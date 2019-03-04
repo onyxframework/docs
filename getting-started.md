@@ -11,7 +11,7 @@ This mini-tutorial will guide your through running your first Onyx-powered web a
 1. Initialize a brand new Crystal application:
 
 ```sh
-> crystal init app hello-onyx && cs hello-onyx
+> crystal init app hello-onyx && cd hello-onyx
 ```
 
 2. Add these lines to the `shards.yml` file:
