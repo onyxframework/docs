@@ -21,7 +21,8 @@
     "@vuepress/plugin-back-to-top": "^1.0.0-alpha.40",
     "@vuepress/plugin-clean-urls": "^1.0.0-alpha.40",
     "@vuepress/plugin-google-analytics": "^1.0.0-alpha.40",
-    "vuepress": "^1.0.0-alpha.40",
+    "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.42",
+    "vuepress": "^1.0.0-alpha.42",
     "vuepress-plugin-sitemap": "^2.1.1"
   }
 }

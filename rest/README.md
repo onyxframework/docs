@@ -1,6 +1,6 @@
 # Onyx::REST
 
-Onyx::REST is purposed to build REST APIs with ease. It consists of:
+Onyx::REST is purposed to build REST APIs with ease. It includes:
 
 * [Routing](/rest/routing) to route the requests
 * [Actions](/rest/actions) for business logic

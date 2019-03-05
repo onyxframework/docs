@@ -4,11 +4,12 @@ module.exports = {
   title: 'Onyx Framework',
   plugins: [
     '@vuepress/back-to-top',
+    '@vuepress/medium-zoom',
     [
       '@vuepress/google-analytics', {
         ga: 'UA-135279567-3'
       }
-    ],
+    ]
     [
       'sitemap', {
         hostname: 'https://docs.onyxframework.org'
@@ -21,103 +22,80 @@ module.exports = {
     editLinks: true,
     nav: [
       { text: 'Home', link: '/' },
+      { text: 'HTTP', link: '/http/' },
       { text: 'REST', link: '/rest/' },
       { text: 'SQL', link: '/sql/' },
       { text: 'EDA', link: '/eda/' }
     ],
-    sidebar: {
-      '/rest/': [
-        {
-          title: 'Essentials',
-          collapsable: false,
-          children: [
-            ['/rest/', 'Introduction'],
-            ['/rest/routing', 'Routing'],
-            ['/rest/actions', 'Actions'],
-            ['/rest/views', 'Views'],
-            ['/rest/renderers', 'Renderers'],
-            ['/rest/channels', 'Channels']
-          ]
-        },
-        {
-          title: 'Best practices',
-          collapsable: true,
-          children: [
-            ['/rest/best-practices/views', 'Views'],
-            ['/rest/best-practices/authentication', 'Authentication']
-          ]
-        },
-        {
-          title: 'Advanced',
-          collapsable: true,
-          children: [
-            ['/rest/advanced/params', 'Advanced params'],
-            ['/rest/advanced/custom-middleware', 'Custom middleware'],
-            ['/rest/advanced/custom-renderers', 'Custom renderers'],
-            ['/rest/advanced/custom-server', 'Custom server'],
-            ['/rest/advanced/multiple-servers', 'Multiple servers']
-          ]
-        }
-      ],
-      '/sql/': [
-        {
-          title: 'Essentials',
-          collapsable: false,
-          children: [
-            ['/sql/', 'Introduction'],
-            ['/sql/schema', 'Schema'],
-            ['/sql/query', 'Query'],
-            ['/sql/repository', 'Repository']
-          ]
-        },
-        {
-          title: 'Advanced',
-          collapsable: true,
-          children: [
-            ['/sql/advanced/custom-converters', 'Custom converters'],
-            ['/sql/advanced/serializable', 'Serializable'],
-            ['/sql/advanced/annotations', 'Annotations']
-          ]
-        }
-      ],
-      '/eda/': [
-        {
-          title: 'Essentials',
-          collapsable: false,
-          children: [
-            ['/eda/', 'Introduction'],
-            ['/eda/events', 'Events'],
-            ['/eda/channels', 'Channels']
-          ]
-        },
-        {
-          title: 'Advanced',
-          collapsable: true,
-          children: [
-            ['/eda/advanced/custom-channels', 'Custom channels']
-          ]
-        }
-      ],
-      '/': [
-        {
-          title: 'Guide',
-          collapsable: false,
-          children: [
-            ['/', 'Introduction'],
-            ['/getting-started', 'Getting Started'],
-            ['/components-overview', 'Components Overview'],
-            ['/deployment', 'Deployment']
-          ]
-        },
-        {
-          title: 'Advanced',
-          collapsable: true,
-          children: [
-            ['/onyx', 'Onyx component'],
-            ['/http', 'HTTP component']
-          ]
-        }
-      ]
-    }
+    sidebar: [
+      {
+        title: 'Essentials',
+        collapsable: false,
+        children: [
+          ['/', 'Introduction'],
+          ['/installation', 'Installation'],
+          ['/components-overview', 'Components Overview']
+        ]
+      },
+      {
+        title: 'HTTP',
+        collapsable: false,
+        children: [
+          ['/http/', 'Getting started'],
+          ['/http/routing', 'Routing'],
+          ['/http/headers', 'Headers'],
+          ['/http/errors', 'Errors'],
+          ['/http/views', 'Views'],
+          ['/http/endpoints', 'Endpoints'],
+          ['/http/channels', 'Channels']
+        ]
+      },
+      {
+        title: 'SQL',
+        collapsable: false,
+        children: [
+          ['/sql/', 'Getting started'],
+          ['/sql/schema', 'Schema'],
+          ['/sql/query', 'Query']
+        ]
+      },
+      {
+        title: 'EDA',
+        collapsable: false,
+        children: [
+          ['/eda/', 'Introduction'],
+          ['/eda/events', 'Events'],
+          ['/eda/channels/', 'Channels'],
+          ['/eda/channels/in-memory', 'In-memory'],
+          ['/eda/channels/redis', 'Redis']
+        ]
+      },
+      {
+        title: 'Advanced HTTP',
+        collapsable: false,
+        children: [
+          ['/http/advanced/custom-error-renderer', 'Custom error renderer'],
+          ['/http/advanced/custom-middleware', 'Custom middleware'],
+          ['/http/advanced/custom-server', 'Custom server'],
+          ['/http/advanced/multiple-servers', 'Multiple servers']
+        ]
+      },
+      {
+        title: 'Advanced SQL',
+        collapsable: false,
+        children: [
+          ['/sql/advanced/custom-converters', 'Custom converters'],
+          ['/sql/advanced/annotations', 'Annotations'],
+          ['/sql/advanced/serializable', 'Serializable']
+        ]
+      },
+      {
+        title: 'Advanced EDA',
+        collapsable: false,
+        children: [
+          ['/eda/advanced/custom-channels', 'Custom channels']
+        ]
+      }
+    ]
   }
 }
