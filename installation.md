@@ -14,7 +14,7 @@ To add Onyx Framework to your Crystal application, you should add it to the `sha
 dependencies:
   onyx:
     github: onyxframework/onyx
-    version: ~> 0.2.0
+    version: ~> 0.3.0
 ```
 
 The framework consists of multiple components. You must add the components you're going to use explicitly into your `shard.yml` file along with `onyx`, for example, [`onyx-http`](https://github.com/onyxframework/http):
@@ -23,7 +23,7 @@ The framework consists of multiple components. You must add the components you'r
 dependencies:
   onyx:
     github: onyxframework/onyx
-    version: ~> 0.2.0
+    version: ~> 0.3.0
   onyx-http:
     github: onyxframework/http
     version: ~> 0.7.0

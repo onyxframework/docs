@@ -24,7 +24,7 @@ To use Onyx Framework, you'll need [Crystal](https://crystal-lang.org) installed
 dependencies:
   onyx:
     github: onyxframework/onyx
-    version: ~> 0.2.0
+    version: ~> 0.3.0
   onyx-http:
     github: onyxframework/http
     version: ~> 0.7.0

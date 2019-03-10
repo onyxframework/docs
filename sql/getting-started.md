@@ -6,10 +6,10 @@ To add the Onyx::SQL functionality into your application, you must explicitly ad
 dependencies:
   onyx:
     github: onyxframework/onyx
-    version: ~> 0.1.0
+    version: ~> 0.3.0
   onyx-sql:
     github: onyxframework/sql
-    version: ~> 0.6.0
+    version: ~> 0.7.0
   pg:
     github: will/crystal-pg
     version: ~> 0.15.0
@@ -97,7 +97,7 @@ With powerful joins:
 ```crystal
 # Fetch all posts by author named "John"
 posts = Onyx.query(Post
-  .join(:author) do |x|
+  .join(author: true) do |x|
     x.where(name: "John")
   end
 )
