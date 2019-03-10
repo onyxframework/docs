@@ -23,7 +23,6 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'HTTP', link: '/http/' },
-      { text: 'REST', link: '/rest/' },
       { text: 'SQL', link: '/sql/' },
       { text: 'EDA', link: '/eda/' }
     ],
