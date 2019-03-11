@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "vuepress dev",
-    "build": "vuepress build"
+    "build": "vuepress build && npm run prettify-urls",
+    "prettify-urls": "find ./.vuepress/dist ! -path './img*' ! -path './assets*' ! -name '_redirects' ! -name '*.*' -type f -exec bash -c 'mv $1 $1.temp; mkdir $1; mv $1.temp $1/index.html' - {} \\;"
   },
   "repository": {
     "type": "git",
