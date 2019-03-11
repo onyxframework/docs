@@ -1,3 +1,0 @@
-# Onyx component
-
-TODO:
