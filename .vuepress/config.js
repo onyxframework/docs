@@ -6,6 +6,11 @@ module.exports = {
     '@vuepress/back-to-top',
     '@vuepress/medium-zoom',
     [
+      '@vuepress/clean-urls', {
+        indexSuffix: '/'
+      }
+    ],
+    [
       '@vuepress/google-analytics', {
         ga: 'UA-135279567-3'
       }
