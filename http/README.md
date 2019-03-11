@@ -10,7 +10,7 @@ To install Onyx::HTTP, you'll need to add both `"onyx"` and `"onyx-http"` into y
 dependencies:
   onyx:
     github: onyxframework/onyx
-    version: ~> 0.2.0
+    version: ~> 0.3.0
   onyx-http:
     github: onyxframework/http
     version: ~> 0.7.0
