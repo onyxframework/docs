@@ -7,6 +7,7 @@ module.exports = {
     '@vuepress/medium-zoom',
     [
       '@vuepress/clean-urls', {
+        normalSuffix: '/',
         indexSuffix: '/'
       }
     ],
