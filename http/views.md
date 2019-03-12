@@ -44,7 +44,7 @@ struct HelloWorld
 
   def call
     # Use the `#view` method...
-    view(Hello.new("Onyx))
+    view(Hello.new("Onyx"))
 
     # Or just return a view
     Hello.new("Onyx")
