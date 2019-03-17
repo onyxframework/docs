@@ -30,7 +30,7 @@ Onyx.get "/" do |env|
   # You can either set the response view explicitly
   env.response.view = Hello.new("Onyx")
 
-  # Or make it the return value of the proc 
+  # Or make it the return value of the proc
   # (ignored if already set before)
   Hello.new("Onyx")
 end
@@ -67,7 +67,7 @@ struct Hello
 end
 ```
 
-Or you can make use of built-in `.json`, `.text` and `.template` macros:
+Or you can make use of built-in `.json`, `.xml`, `.text` and `.template` macros:
 
 ```crystal
 struct Hello
@@ -78,6 +78,13 @@ struct Hello
 
   # Will be rendered if `Accept` header is `application/json`
   json message: "Hello, #{@who}!"
+
+  # Will be rendered if `Accept` header is `application/xml`
+  xml do
+    element "hello" do
+      attribute "who", @who
+    end
+  end
 
   # Will be rendered if `Accept` header is `text/html`
   template "./hello.ecr.html"
@@ -106,9 +113,17 @@ struct Hello
   json({
     message: "Hello, #{@who}!"
   })
+end
+```
 
-  # Expands to:
-  #
+Which expands to:
+
+```crystal
+struct Hello
+  include Onyx::HTTP::View
+
+  def initialize(@who : String)
+  end
 
   # Defined unless `to_json` is already defined
   def to_json(io : IO)
@@ -177,9 +192,17 @@ struct Hello
       field "message", "Hello, #{@who}!"
     end
   end
+end
+```
 
-  # Expands to:
-  #
+Which expands to:
+
+```crystal
+struct Hello
+  include Onyx::HTTP::View
+
+  def initialize(@who : String)
+  end
 
   def to_json(io : IO)
     builder = JSON::Builder.new(io)
@@ -230,6 +253,25 @@ struct ManyUsers
 
   # `#to_json` will be called on every `SingleUser` instance
   json(@users.map{ |u| SingleUser.new(u) })
+end
+```
+
+## XML
+
+`xml` macro accepts a block just like the builder variant of [`json`](#json), but instead of `JSON::Builder` it uses [`XML::Builder`](https://crystal-lang.org/api/latest/XML/Builder.html):
+
+```crystal
+struct Hello
+  include Onyx::HTTP::View
+
+  def initialize(@who : String)
+  end
+
+  xml do
+    element "hello" do
+      attribute "who", @who
+    end
+  end
 end
 ```
 
