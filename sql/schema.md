@@ -172,7 +172,7 @@ UUID | TEXT | [SQLite3::UUIDText](https://api.onyxframework.org/sql/Onyx/SQL/Con
 
 \* `0` for `false`, `1` for `true`<br>
 \*\* Stored in [`SQLite3::DATE_FORMAT`](https://github.com/crystal-lang/crystal-sqlite3/blob/master/src/sqlite3.cr#L5)<br>
-\*\*\* Any type with `#to_json` and `.from_json` method, e.g. [JSON::Serializable](https://crystal-lang.org/api/0.27.2/JSON/Serializable.html)
+\*\*\* Any type with `#to_json` and `.from_json` method, e.g. [JSON::Serializable](https://crystal-lang.org/api/0.27.2/JSON/Serializable.html). Note that `Enumerable` (e.g. `Array(String)` or `Hash(String, String)`) won't work in this case, use custom serializable struct instead
 
 #### `crystal-pg` types
 
@@ -192,11 +192,12 @@ Time | TIME, TIMESTAMP etc.
 Nil | NULL
 Enumerable* | *varies* | [PG::Any](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/Any.html)
 Enum, Enumerable(Enum) | ENUM | [PG::Enum](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/Enum.html)
-JSON** | JSON, JSONB | [PG::JSON](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/JSON.html)
+JSON** | JSON | [PG::JSON](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/JSON.html)
+JSON** | JSONB | [PG::JSONB](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/JSONB.html)
 UUID | BLOB | [PG::UUID](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/UUID.html)
 
 \* Actual type depends on enumerable type (e.g. `int[]` for `Array(Int32)`)<br>
-\*\* Any type with `#to_json` and `.from_json` method, e.g. [JSON::Serializable](https://crystal-lang.org/api/0.27.2/JSON/Serializable.html)
+\*\* Any type with `#to_json` and `.from_json` method, e.g. [JSON::Serializable](https://crystal-lang.org/api/0.27.2/JSON/Serializable.html). Note that `Enumerable` (e.g. `Array(String)` or `Hash(String, String)`) won't work in this case, use custom serializable struct instead
 
 #### `crystal-mysql` types
 
@@ -294,7 +295,7 @@ CREATE TABLE posts (
 ```crystal
 class User
   include Onyx::SQL::Model
-  
+
   schema users do
     pkey id : Int32
     type posts : Array(Post), foreign_key: "author_id"
