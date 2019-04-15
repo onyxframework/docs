@@ -280,7 +280,7 @@ end
 Templates are rendered with [Kilt](https://github.com/jeromegn/kilt) shard. Templates have access to the view context, for example:
 
 ```erb
-<!-- ./hello.ecr.html -->
+<!-- ./hello.html.ecr -->
 <p>Hello, <%= @who %>!</p>
 ```
 
@@ -291,14 +291,14 @@ struct Hello
   def initialize(@who : String)
   end
 
-  template("./hello.ecr.html")
+  template("./hello.html.ecr")
 
   # Expands to:
   #
 
   def render_to_text_html(context)
     context.response.content_type = "text/html"
-    Kilt.render("./hello.ecr.html", context.response)
+    Kilt.render("./hello.html.ecr", context.response)
   end
 end
 ```
@@ -313,22 +313,22 @@ struct Hello
   end
 
   # `Content-Type: text/html`, `Accept: text/html`
-  template("./hello.ecr.html")
+  template("./hello.html.ecr")
 
   # `Content-Type: application/xml`, `Accept: application/xml`
-  template("./hello.ecr.xml", content_type: "application/xml", accept: {"application/xml"})
+  template("./hello.xml.ecr", content_type: "application/xml", accept: {"application/xml"})
 
   # Expands to:
   #
 
   def render_to_text_html(context)
     context.response.content_type = "text/html"
-    Kilt.render("./hello.ecr.html", context.response)
+    Kilt.render("./hello.html.ecr", context.response)
   end
 
   def render_to_application_xml(context)
     context.response.content_type = "application/xml"
-    Kilt.render("./hello.ecr.xml", context.response)
+    Kilt.render("./hello.xml.ecr", context.response)
   end
 end
 ```
