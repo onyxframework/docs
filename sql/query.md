@@ -15,13 +15,13 @@ Onyx::SQL includes **type-safe** SQL query builder which implements most of comm
 The builder is a `Query(T)` *struct*, for example, `Query(User)`:
 
 ```crystal
-query = Query(User).new
+query = Onyx::SQL::Query(User).new
 ```
 
 To start building the query, call some methods on it:
 
 ```crystal
-query = Query(User).new.select(:name).where(id: 42)
+query = Onyx::SQL::Query(User).new.select(:name).where(id: 42)
 ```
 
 All its methods return `self`, so the calls are chainable.
@@ -31,7 +31,7 @@ All its methods return `self`, so the calls are chainable.
 Keep in mind that `Query(T)` is a **struct**, so you must not do this:
 
 ```crystal
-query = Query(User).new.select(:name)
+query = Onyx::SQL::Query(User).new.select(:name)
 query.where(id: 42) # You're calling it on a `query` copy, not itself
 query # Doesn't have "where(id: 42)"
 ```
@@ -39,7 +39,7 @@ query # Doesn't have "where(id: 42)"
 To avoid such behaviour, either always chain the queries or do like this:
 
 ```crystal
-query = Query(User).new.select(:name)
+query = Onyx::SQL::Query(User).new.select(:name)
 query = query.where(id: 42)
 query # Actually has "where(id: 42)"
 ```
@@ -50,10 +50,10 @@ A query instance has `#build` and `#to_s` methods. The first one returns a tuple
 
 ```crystal
 # A empty query builds into a "select all" query
-Query(User).new.build == {"SELECT users.* FROM users", []}
-Query(User).new.to_s == "SELECT users.* FROM users"
+Onyx::SQL::Query(User).new.build == {"SELECT users.* FROM users", []}
+Onyx::SQL::Query(User).new.to_s == "SELECT users.* FROM users"
 
-query = Query(User).new.select(:name).where(id: 42)
+query = Onyx::SQL::Query(User).new.select(:name).where(id: 42)
 query.build == {"SELECT users.name FROM users WHERE id = ?", [42]}
 query.to_s == "SELECT users.name FROM users WHERE id = ?"
 ```
@@ -61,7 +61,7 @@ query.to_s == "SELECT users.name FROM users WHERE id = ?"
 Note that all values in SQL string are replaced with `?`. It is made to prevent SQL injections. However, in PostgreSQL variables are denoted in `$1`, `$2`, `$n` style. To build a query with PostgreSQL-type params, pass `true` option to these methods:
 
 ```crystal
-query = Query(User).new.select(:name).where(id: 42)
+query = Onyx::SQL::Query(User).new.select(:name).where(id: 42)
 query.build(true) == {"SELECT users.name FROM users WHERE id = $1", [42]}
 query.to_s(true) == "SELECT users.name FROM users WHERE id = $1"
 ```
@@ -76,7 +76,7 @@ You can use a query with raw [`DB`](http://crystal-lang.github.io/crystal-db/api
 
 ```crystal
 db = DB.open(ENV["DATABASE_URL"])
-query = Query(User).new.select(:name).where(id: 42)
+query = Onyx::SQL::Query(User).new.select(:name).where(id: 42)
 
 # We use splat, as Query#build returns a tuple of two
 user = User.from_rs(db.query(*query.build)).first?
@@ -94,17 +94,17 @@ But it is more convenient to make use of [Repository](/sql/repository), which wr
 ```crystal
 require "onyx/sql"
 
-Onyx.repo # <= This guy
+Onyx::SQL.repo # <= This guy
 
 # You can either use the `Onyx.repo` instance
-Onyx.repo.query()
-Onyx.repo.exec()
-Onyx.repo.scalar()
+Onyx::SQL.repo.query()
+Onyx::SQL.repo.exec()
+Onyx::SQL.repo.scalar()
 
 # Or better use shorcuts:
-Onyx.query()
-Onyx.exec()
-Onyx.scalar()
+Onyx::SQL.query()
+Onyx::SQL.exec()
+Onyx::SQL.scalar()
 ```
 
 ::: warning REMINDER
@@ -114,19 +114,19 @@ Remember that once you've required `"onyx/sql"`, the `DATABASE_URL` environment 
 We will use the shortcut version in the examples:
 
 ```crystal
-user = Onyx.query(Query(User).new.select(:name).where(id: 42)).first?
+user = Onyx::SQL.query(Onyx::SQL::Query(User).new.select(:name).where(id: 42)).first?
 ```
 
 Great, no need to worry neither about `DB` nor about `?` and `$n`. But it looks kinda long, doesn't it? Worry not, all models include query shortcuts:
 
 ```crystal
-user = Onyx.query(User.select(:name).where(id: 42)).first?
+user = Onyx::SQL.query(User.select(:name).where(id: 42)).first?
 ```
 
 That's what we're talking about! The quality of life must be much higher right now. Of course, you can use the shortcuts outside the repository, they expand to regular `Query(T)` instances:
 
 ```crystal
-User.where(id: 42) == Query(User).new.where(id: 42)
+User.where(id: 42) == Onyx::SQL::Query(User).new.where(id: 42)
 ```
 
 ## Changeset
@@ -165,7 +165,7 @@ Use it to generate an insertion query for this model instance:
 user = User.new(name: "John")
 user.insert == User.insert(id: nil, name: "John", created_at: nil)
 
-user = Onyx.query(user.insert.returning(User)).first
+user = Onyx::SQL.query(user.insert.returning(User)).first
 pp user # <User @id=1 @name="John" created_at=<Time ...>>
 ```
 
@@ -221,7 +221,7 @@ changeset = user.changeset
 changeset.update(name: "Jake")
 
 user.update(changeset) == User.update.set(name: "Jake").where(id: 1)
-Onyx.exec(user.update(changeset))
+Onyx::SQL.exec(user.update(changeset))
 ```
 
 ::: danger UNSAFE
@@ -263,6 +263,29 @@ This shortcut **requires** the primary key value to be set in the model instance
 
 ```crystal
 user = User.new
+user.delete # NilAssetionError
+```
+
+:::
+
+## Enumerable shortcuts
+
+You can use `#insert` and `#delete` methods on `Enumerable`s. It is particularly useful to insert or delete in bulk:
+
+```crystal
+users = [User.new(name: "John"), User.new(name: "Jake")]
+users.insert.build == {"INSERT INTO users (name) VALUES (?), (?)", ["John", "Jake"]}
+users = Onyx::SQL.query(users.insert.returning(User)) # Neat
+
+users.delete.build == {"DELETE FROM users WHERE id IN (?, ?)", [1, 2]}
+Onyx::SQL.exec(users.delete)
+```
+
+::: danger UNSAFE
+`delete` shortcut **requires** the primary key value to be set in **all** model instance, otherwise raising the [`NilAssetionError`](https://crystal-lang.org/api/0.27.2/NilAssertionError.html) in **runtime**.
+
+```crystal
+users = [User.new]
 user.delete # NilAssetionError
 ```
 
@@ -523,7 +546,7 @@ You can chain `WHERE` clauses with `where_not`, `and_where`, `and_where_not`, `o
 You can join references with block, which yields a sub-query, which in turn would be merged with the main one. In the following example we query all posts from author with ID 1:
 
 ```crystal
-posts = Onyx.query(Post
+posts = Onyx::SQL.query(Post
   .join(author: true) do |x|
     x.where(id: 1)
   end
@@ -554,7 +577,7 @@ pp posts.first # #<Post @id=42, @content="Blah", @author=#<User @id=1, @name=nil
 There is no magic here, because `author_id` column is included into `posts.*`, that why the ORM updates the reference instance. If you want to fetch other author's fields, then call `select` method on the sub-query (which is in fact a `Query(User)` instance):
 
 ```crystal
-posts = Onyx.query(Post
+posts = Onyx::SQL.query(Post
   .join(author: true) do |x|
     x.select(:name)
     x.where(id: 1)
@@ -582,7 +605,7 @@ Only `where`, `select`, `join` and `order_by` methods are merged in the parent q
 You can do nested joins as well:
 
 ```crystal
-posts = Onyx.query(Post
+posts = Onyx::SQL.query(Post
   .join(author: true) do |x|
     x.join(settings: true) do |y|
       y.select(:foo)

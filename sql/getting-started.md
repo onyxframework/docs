@@ -6,13 +6,13 @@ To add the Onyx::SQL functionality into your application, you must explicitly ad
 dependencies:
   onyx:
     github: onyxframework/onyx
-    version: ~> 0.3.0
+    version: ~> 0.4.0
   onyx-sql:
     github: onyxframework/sql
-    version: ~> 0.7.0
+    version: ~> 0.8.0
   pg:
     github: will/crystal-pg
-    version: ~> 0.15.0
+    version: ~> 0.16.0
 ```
 
 Then in your Crystal code you should require both `onyx-sql` and the database shard requiring the database shard **before** the ORM:
@@ -89,14 +89,14 @@ user = User.from_rs(db.query("SELECT * FROM users WHERE id = ?", 42)).first?
 Or make use of the powerful [Repository](/sql/repository) class wrapping the DB connection and [Query](/sql/query) struct providing a convenient and type-safe way to build SQL queries:
 
 ```crystal
-user = Onyx.query(User.where(id: 42)).first?
+user = Onyx::SQL.query(User.where(id: 42)).first?
 ```
 
 With powerful joins:
 
 ```crystal
 # Fetch all posts by author named "John"
-posts = Onyx.query(Post
+posts = Onyx::SQL.query(Post
   .join(author: true) do |x|
     x.where(name: "John")
   end
