@@ -25,7 +25,7 @@ struct RandomUser
   end
 end
 
-Onyx.get "/random_user", RandomUser
+Onyx::HTTP.get "/random_user", RandomUser
 ```
 
 ## Call
@@ -181,7 +181,7 @@ end
 In this example we've defined a *path parameter* named `id`. The endpoint would parse it from an incoming request's URI (in fact, it is parsed by the router internally, not the action itself). The route should look like this:
 
 ```crystal
-Onyx.get "/users/:id", GetUser
+Onyx::HTTP.get "/users/:id", GetUser
 ```
 
 Note the `:id` part. This is a *path parameter*. When doing a `GET /users/42/` request, the `id` equals to `42`. Therefore this line would print `42`:
@@ -312,7 +312,7 @@ struct CreateUser
   end
 end
 
-Onyx.post "/users", CreateUser
+Onyx::HTTP.post "/users", CreateUser
 ```
 
 ```sh
@@ -438,7 +438,7 @@ struct GetPost
   end
 end
 
-Onyx.get "/posts/:id", GetPost
+Onyx::HTTP.get "/posts/:id", GetPost
 ```
 
 In this case, `PostNotFound` is `< Onyx::HTTP::Error(404)`. Onyx renders the error properly:

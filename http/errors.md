@@ -9,11 +9,11 @@ Whenever you experience an unhandled exception, it will be properly rescued by O
 ```crystal
 require "onyx/http"
 
-Onyx.get "/" do
+Onyx::HTTP.get "/" do
   1 / 0
 end
 
-Onyx.listen
+Onyx::HTTP.listen
 ```
 
 First of all, you'll see this error in your console log:
@@ -51,13 +51,13 @@ The error would also be pretty printed in JSON:
 
 ```sh
 > curl localhost:5000 -H "Accept: application/json"
-{  
-  "error":{  
+{
+  "error":{
     "name": "Division By Zero Error",
     "message": "Division by 0",
     "code": 500,
-    "payload": {  
-      "backtrace": [  
+    "payload": {
+      "backtrace": [
         "/usr/share/crystal/src/int.cr:155:5 in 'check_div_argument'",
         "..."
       ]
@@ -70,8 +70,8 @@ And in production mode:
 
 ```sh
 > curl localhost:5000 -H "Accept: application/json"
-{  
-  "error": {  
+{
+  "error": {
     "name": "Internal Server Error",
     "message": null,
     "code": 500,
@@ -85,8 +85,8 @@ And in production mode:
 Most of the time you'll have so called *expected* errors in your application. For example, when a user cannot be found by ID provided as path param, a 404 HTTP error should be returned. You can print such a error manually into the response like this:
 
 ```crystal
-Onyx.get "/users/:id" do |env|
-  user? = Onyx.query(User.where(id: env.request.path_params["id"].to_i)).first?
+Onyx::HTTP.get "/users/:id" do |env|
+  user? = Onyx::SQL.query(User.where(id: env.request.path_params["id"].to_i)).first?
 
   if user = user?
     return Views::User.new(user)
@@ -102,8 +102,8 @@ But what about rendering this error in JSON or HTML? For better control flow and
 class UserNotFound < Onyx::HTTP::Error(404)
 end
 
-Onyx.get "/users/:id" do |env|
-  user = Onyx.query(User.where(id: env.request.path_params["id"].to_i)).first?
+Onyx::HTTP.get "/users/:id" do |env|
+  user = Onyx::SQL.query(User.where(id: env.request.path_params["id"].to_i)).first?
   raise UserNotFound.new unless user
 
   return Views::User.new(user)
@@ -146,10 +146,10 @@ class UserNotFound < Onyx::HTTP::Error(404)
   end
 end
 
-Onyx.get "/users/:id" do |env|
+Onyx::HTTP.get "/users/:id" do |env|
   id = env.request.path_params["id"].to_i
 
-  user = Onyx.query(User.where(id: id)).first?
+  user = Onyx::SQL.query(User.where(id: id)).first?
   raise UserNotFound.new(id) unless user
 
   return Views::User.new(user)
@@ -163,12 +163,12 @@ end
 
 ```sh
 > curl localhost:5000/users/42 -H "Accept: application/json"
-{  
-  "error": {  
+{
+  "error": {
     "name": "User Not Found",
     "message": "User not found with ID 42",
     "code": 404,
-    "payload": {  
+    "payload": {
       "id": 42
     }
   }

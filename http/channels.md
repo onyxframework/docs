@@ -24,11 +24,11 @@ class Echo
   end
 end
 
-Onyx.ws "/echo", Echo
+Onyx::HTTP.ws "/echo", Echo
 ```
 
 ```sh
-> wscat http://localhost:5000/echo
+> wscat --connect http://localhost:5000/echo
 < Hello
 > Foo
 < Foo
@@ -95,5 +95,5 @@ class ProtectedEcho
   end
 end
 
-Onyx.ws "/echo/:room", ProtectedEcho
+Onyx::HTTP.ws "/echo/:room", ProtectedEcho
 ```

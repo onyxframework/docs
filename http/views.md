@@ -5,7 +5,7 @@
 To actually modify the response body, you usually print right into it, as it's being an IO:
 
 ```crystal
-Onyx.get "/" do |env|
+Onyx::HTTP.get "/" do |env|
   env.response << "Hello, Onyx!"
 end
 ```
@@ -26,7 +26,7 @@ struct Hello
   end
 end
 
-Onyx.get "/" do |env|
+Onyx::HTTP.get "/" do |env|
   # You can either set the response view explicitly
   env.response.view = Hello.new("Onyx")
 
@@ -87,7 +87,7 @@ struct Hello
   end
 
   # Will be rendered if `Accept` header is `text/html`
-  template "./hello.ecr.html"
+  template "./hello.html.ecr"
 
   # Will be rendered if `Accept` header is `text/plain`,
   # `*/*` or missing (i.e. fallback)
@@ -280,7 +280,7 @@ end
 Templates are rendered with [Kilt](https://github.com/jeromegn/kilt) shard. Templates have access to the view context, for example:
 
 ```erb
-<!-- ./hello.ecr.html -->
+<!-- ./hello.html.ecr -->
 <p>Hello, <%= @who %>!</p>
 ```
 
@@ -291,14 +291,14 @@ struct Hello
   def initialize(@who : String)
   end
 
-  template("./hello.ecr.html")
+  template("./hello.html.ecr")
 
   # Expands to:
   #
 
   def render_to_text_html(context)
     context.response.content_type = "text/html"
-    Kilt.render("./hello.ecr.html", context.response)
+    Kilt.render("./hello.html.ecr", context.response)
   end
 end
 ```
@@ -313,7 +313,7 @@ struct Hello
   end
 
   # `Content-Type: text/html`, `Accept: text/html`
-  template("./hello.ecr.html")
+  template("./hello.html.ecr")
 
   # `Content-Type: application/xml`, `Accept: application/xml`
   template("./hello.ecr.xml", content_type: "application/xml", accept: {"application/xml"})
@@ -323,7 +323,7 @@ struct Hello
 
   def render_to_text_html(context)
     context.response.content_type = "text/html"
-    Kilt.render("./hello.ecr.html", context.response)
+    Kilt.render("./hello.html.ecr", context.response)
   end
 
   def render_to_application_xml(context)

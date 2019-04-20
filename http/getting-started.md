@@ -24,10 +24,10 @@ To use Onyx Framework, you'll need [Crystal](https://crystal-lang.org) installed
 dependencies:
   onyx:
     github: onyxframework/onyx
-    version: ~> 0.3.0
+    version: ~> 0.4.0
   onyx-http:
     github: onyxframework/http
-    version: ~> 0.7.0
+    version: ~> 0.8.0
 ```
 
 3. Run this command to install the dependencies:
@@ -41,11 +41,11 @@ dependencies:
 ```crystal
 require "onyx/http"
 
-Onyx.get "/" do |env|
+Onyx::HTTP.get "/" do |env|
   env.response << "Hello, Onyx!"
 end
 
-Onyx.listen
+Onyx::HTTP.listen
 ```
 
 5. Launch the server:
@@ -89,11 +89,11 @@ end
 require "onyx/http"
 require "./hello-view"
 
-Onyx.get "/" do |env|
+Onyx::HTTP.get "/" do |env|
   HelloView.new("Onyx")
 end
 
-Onyx.listen
+Onyx::HTTP.listen
 ```
 
 3. Test the endpoint again:
@@ -113,11 +113,11 @@ Let's add a simple echo websocket to our application.
 require "onyx/http"
 require "./hello-view"
 
-Onyx.get "/" do |env|
+Onyx::HTTP.get "/" do |env|
   HelloView.new("Onyx")
 end
 
-Onyx.ws "/" do |socket, env|
+Onyx::HTTP.ws "/" do |socket, env|
   socket.send("Hello!")
   socket.on_message do |message|
     socket.send(message)
@@ -130,7 +130,10 @@ Onyx.listen
 2. Test the websocket ([wscat](https://www.npmjs.com/package/wscat) is used here):
 
 ```sh
-TODO:
+> wscat --connect localhost:5000
+> Hello!
+> ping # Your input
+< ping
 ```
 
 To continue learning about Onyx::HTTP, please visit the [Routing](/http/routing) section.

@@ -21,7 +21,7 @@ max_age = 0
 You can change these settings on the server run:
 
 ```crystal
-Onyx.listen(
+Onyx::HTTP.listen(
   cors: {
     # Will be merged with the default settings
     allow_headers: ["accept", "content-type", "authorization"]
