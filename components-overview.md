@@ -80,17 +80,17 @@ end
 Server puts it all together:
 
 ```crystal
-require "onyx/rest"
+require "onyx/http"
 
 require "models/**"
 require "endpoints/**"
 require "views/**"
 require "channels/**"
 
-Onyx.get "/users/:id", Endpoints::Users::Get
-Onyx.ws "/echo", Channels::Echo
+Onyx::HTTP.get "/users/:id", Endpoints::Users::Get
+Onyx::HTTP.ws "/echo", Channels::Echo
 
-Onyx.listen
+Onyx::HTTP.listen
 ```
 
 ## SQL
