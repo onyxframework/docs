@@ -178,7 +178,7 @@ UUID | TEXT | [SQLite3::UUIDText](https://api.onyxframework.org/sql/Onyx/SQL/Con
 
 Shard homepage: [will/crystal-pg](https://github.com/will/crystal-pg)
 
-Crystal type | SQLite3 type | Required converter
+Crystal type | Postgres type | Required converter
 --- | --- | --- | ---
 Bool | BOOLEAN
 Float32 | REAL
