@@ -12,11 +12,11 @@ end
 
 However, sometimes you want to:
 
-* Render the same response differently depending on the user device (effectively `Accept` header)
-* Re-use the rendering logic (for example, rendering a single user and array of users is almost equal)
-* Move the rendering logic away from business layer
+- Render the same response differently depending on the user device (effectively `Accept` header)
+- Re-use the rendering logic (for example, rendering a single user and array of users is almost equal)
+- Move the rendering logic away from business layer
 
-For this, Onyx::HTTP has a [View](https://api.onyxframework.org/rest/Onyx/REST/View.html) module. Include the `Onyx::HTTP::View` module into an object (preferrably struct) to mark it as a view:
+For this, Onyx::HTTP has a [View](https://api.onyxframework.com/rest/Onyx/REST/View.html) module. Include the `Onyx::HTTP::View` module into an object (preferrably struct) to mark it as a view:
 
 ```crystal
 struct Hello
@@ -303,7 +303,7 @@ struct Hello
 end
 ```
 
-By default, `.template` macro has `content_type: "text/html"` and `accept: {"text/html"}` arguments, which means that it would be rendered only if `Accept` header value is included into `{"text/html"}` tuple and set the `Content-Type` header to  `text/html` afterwards. You can override these arguments and even define multiple templates to render depending on the `Accept` header:
+By default, `.template` macro has `content_type: "text/html"` and `accept: {"text/html"}` arguments, which means that it would be rendered only if `Accept` header value is included into `{"text/html"}` tuple and set the `Content-Type` header to `text/html` afterwards. You can override these arguments and even define multiple templates to render depending on the `Accept` header:
 
 ```crystal
 struct Hello

@@ -18,7 +18,7 @@ module.exports = {
     ]
     [
       'sitemap', {
-        hostname: 'https://docs.onyxframework.org'
+        hostname: 'https://docs.onyxframework.com'
       }
     ]
   ],

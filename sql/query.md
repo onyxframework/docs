@@ -7,12 +7,12 @@ sidebarDepth: "2"
 Onyx::SQL includes **type-safe** SQL query builder which implements most of common SQL. In fact, its syntax resembles SQL, but allows to create queries with fields and references instead of raw SQL columns. Moreover, the builder will raise meaningful errors in compilation time if you, for example, tried to pass a wrong argument type to the query. However, there are some cases where the builder is not fully type safe, they will be highlighted like this:
 
 ::: danger UNSAFE
-*Description of why is it unsafe.*
+_Description of why is it unsafe._
 :::
 
 ## Getting started
 
-The builder is a `Query(T)` *struct*, for example, `Query(User)`:
+The builder is a `Query(T)` _struct_, for example, `Query(User)`:
 
 ```crystal
 query = Onyx::SQL::Query(User).new
@@ -86,7 +86,7 @@ user = User.from_rs(db.query(query.build[0], query.build[1])).first?
 ```
 
 ::: tip
-The [`.from_rs`](https://api.onyxframework.org/sql/Onyx/SQL/Serializable.html#from_rs%28rs%3ADB%3A%3AResultSet%29%3AArray%28self%29-class-method) method is present in all models and it allows to initialize **an array** of such models from a [`DB::ResultSet`](http://crystal-lang.github.io/crystal-db/api/0.5.1/DB/ResultSet.html).
+The [`.from_rs`](https://api.onyxframework.com/sql/Onyx/SQL/Serializable.html#from_rs%28rs%3ADB%3A%3AResultSet%29%3AArray%28self%29-class-method) method is present in all models and it allows to initialize **an array** of such models from a [`DB::ResultSet`](http://crystal-lang.github.io/crystal-db/api/0.5.1/DB/ResultSet.html).
 :::
 
 But it is more convenient to make use of [Repository](/sql/repository), which wraps the DB connection, automatically builds query (with knowledge of the underlying DB driver, therefore passing `true` to the `Query#build` if needed) and maps the result to model instances.
@@ -131,7 +131,7 @@ User.where(id: 42) == Onyx::SQL::Query(User).new.where(id: 42)
 
 ## Changeset
 
-To track changes made to a model instance, a concept of *changeset* exists. When you call the `instance.changeset` method, its snapshot is created:
+To track changes made to a model instance, a concept of _changeset_ exists. When you call the `instance.changeset` method, its snapshot is created:
 
 ```crystal
 user = User.new(id: 1, name: "John", age: 18)
@@ -239,7 +239,7 @@ user.update(changeset) # NilAssetionError
 :::
 
 ::: danger UNSAFE
-This method would also raise [`NoChangesError`](https://api.onyxframework.org/sql/Onyx/SQL/Model/Changeset/NoChanges.html) if the changeset is empty:
+This method would also raise [`NoChangesError`](https://api.onyxframework.com/sql/Onyx/SQL/Model/Changeset/NoChanges.html) if the changeset is empty:
 
 ```crystal
 user = User.new(id: 1, name: "John", age: 18)
@@ -359,7 +359,7 @@ Also see the [`Model#insert` shortcut](#insert-shortcut).
 
 ### update
 
-Marks the query as `UPDATE` one. It *requires* at least one [`set`](#set) afterwards.<br>Also see the [`Model#update` shortcut](#update-shortcut).
+Marks the query as `UPDATE` one. It _requires_ at least one [`set`](#set) afterwards.<br>Also see the [`Model#update` shortcut](#update-shortcut).
 
 ### set
 
@@ -564,7 +564,7 @@ WHERE author.id = ?
 
 ::: tip
 
-If *parent* query hasn't had any `#select` calls **before** the join with *sub-query*, then it is called with `#select(self)` (i.e. `#select(Post)` in this example). This is made to avoid redundant columns fetching.
+If _parent_ query hasn't had any `#select` calls **before** the join with _sub-query_, then it is called with `#select(self)` (i.e. `#select(Post)` in this example). This is made to avoid redundant columns fetching.
 
 :::
 

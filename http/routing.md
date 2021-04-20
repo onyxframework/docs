@@ -58,7 +58,7 @@ Onyx::HTTP.ws "/", MyChannel
 
 ## Path params
 
-You can define path params in routes. These params will then be accessible via [`context.request.path_params`](https://api.onyxframework.org/http/HTTP/Request.html#path_params%3AHash%28String%2CString%29-instance-method) getter:
+You can define path params in routes. These params will then be accessible via [`context.request.path_params`](https://api.onyxframework.com/http/HTTP/Request.html#path_params%3AHash%28String%2CString%29-instance-method) getter:
 
 ```crystal
 Onyx::HTTP.get "/users/:id" do |env|
@@ -95,7 +95,7 @@ The resulting route paths would consist of all namespaces contatenated, for exam
 
 ## Request ID
 
-The request would also have an unique identifier accessible via [`context.request.id`](https://api.onyxframework.org/http/HTTP/Request.html#id-instance-method) getter:
+The request would also have an unique identifier accessible via [`context.request.id`](https://api.onyxframework.com/http/HTTP/Request.html#id-instance-method) getter:
 
 ```crystal
 Onyx::HTTP.get "/" do |env|

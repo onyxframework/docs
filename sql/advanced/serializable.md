@@ -1,6 +1,6 @@
 # Serializable
 
-TODO: You can include [`Onyx::SQL::Serializable`](https://api.onyxframework.org/sql/Onyx/SQL/Serializable.html) into any object to make it de-serializable **from** database. It is good for re-usable business objects, for example:
+TODO: You can include [`Onyx::SQL::Serializable`](https://api.onyxframework.com/sql/Onyx/SQL/Serializable.html) into any object to make it de-serializable **from** database. It is good for re-usable business objects, for example:
 
 ```crystal
 struct PopularTag
@@ -31,6 +31,7 @@ struct PopularTag
   end
 end
 ```
+
 :::
 
-Interesting fact: the [`Onyx::SQL::Model`](https://api.onyxframework.org/sql/Onyx/SQL/Model.html) module actually includes `Onyx::SQL::Serializable`!
+Interesting fact: the [`Onyx::SQL::Model`](https://api.onyxframework.com/sql/Onyx/SQL/Model.html) module actually includes `Onyx::SQL::Serializable`!

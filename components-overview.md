@@ -149,7 +149,7 @@ pp user # <User @name="John" @age=18>
 
 ## EDA
 
-[Onyx::EDA](/eda/) allows to implement [Event-Driven Architecture](https://en.wikipedia.org/wiki/Event-driven_architecture) in your applications to make them reactive. See the [**Distributed websocket chat in 40 lines of code**](https://blog.onyxframework.org/posts/distributed-websocket-chat-in-40-loc/) blog post for a real-life example.
+[Onyx::EDA](/eda/) allows to implement [Event-Driven Architecture](https://en.wikipedia.org/wiki/Event-driven_architecture) in your applications to make them reactive. See the [**Distributed websocket chat in 40 lines of code**](https://blog.onyxframework.com/posts/distributed-websocket-chat-in-40-loc/) blog post for a real-life example.
 
 ```crystal
 require "onyx/eda"

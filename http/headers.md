@@ -35,7 +35,7 @@ It is also possible to alter the middleware completely, read about it at the [Cu
 
 ## Request ID
 
-An unique request identifier ([`context.request.id`](https://api.onyxframework.org/http/HTTP/Request.html#id%3AString%3F-instance-method)) is also put into the `"X-Request-ID"` header:
+An unique request identifier ([`context.request.id`](https://api.onyxframework.com/http/HTTP/Request.html#id%3AString%3F-instance-method)) is also put into the `"X-Request-ID"` header:
 
 ```sh
 < X-Request-ID: e6fa3c3e-93ce-4ad4-b480-957cb13b56eb

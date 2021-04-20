@@ -30,9 +30,9 @@ Onyx::HTTP.get "/random_user", RandomUser
 
 ## Call
 
-The `call` method is abstract and is required to be implemented in all your endpoints. This is where the *action*, i.e. business-logic of your endpoint, takes place. Think about fetching a user or inserting a post into database.
+The `call` method is abstract and is required to be implemented in all your endpoints. This is where the _action_, i.e. business-logic of your endpoint, takes place. Think about fetching a user or inserting a post into database.
 
-The resulting view is determined either with the [`view`](https://api.onyxframework.org/http/Onyx/HTTP/Endpoint.html#view%28view%3AView%29-instance-method) call or by the return value. The former takes precedence:
+The resulting view is determined either with the [`view`](https://api.onyxframework.com/http/Onyx/HTTP/Endpoint.html#view%28view%3AView%29-instance-method) call or by the return value. The former takes precedence:
 
 ```crystal
 def call
@@ -113,11 +113,11 @@ After N2
 
 The `Onyx::HTTP::Endpoint` module also includes some helper methods:
 
-* `context` to access the current [`HTTP::Server::Context`](https://crystal-lang.org/api/latest/HTTP/Server/Context.html)
-* [`view`](https://api.onyxframework.org/http/Onyx/HTTP/Action.html#view%28view%3AView%29-instance-method) to set the resulting view
-* `status` to update the response status (e.g. `status(201)`)
-* `header` to set the response header (e.g. `header("X-Foo", "bar")`)
-* `redirect` to set the status to `302` and the `"Location"` header to the destination, e.g. `redirect("https://google.com")`. Note that it does **not** halt the execution of the action, it just modifies the response
+- `context` to access the current [`HTTP::Server::Context`](https://crystal-lang.org/api/latest/HTTP/Server/Context.html)
+- [`view`](https://api.onyxframework.com/http/Onyx/HTTP/Action.html#view%28view%3AView%29-instance-method) to set the resulting view
+- `status` to update the response status (e.g. `status(201)`)
+- `header` to set the response header (e.g. `header("X-Foo", "bar")`)
+- `redirect` to set the status to `302` and the `"Location"` header to the destination, e.g. `redirect("https://google.com")`. Note that it does **not** halt the execution of the action, it just modifies the response
 
 All [Callbacks](#callbacks) have access to these helpers:
 
@@ -137,12 +137,12 @@ end
 
 ## Params
 
-Endpoints and [Channels](/http/channels) include powerful `params` macro which allows to define endpoint parameters (or *params* for short) from many sources:
+Endpoints and [Channels](/http/channels) include powerful `params` macro which allows to define endpoint parameters (or _params_ for short) from many sources:
 
-* Path params with `path` macro
-* Query params with `query` macro
-* Form (`Content-Type: x-www-urlformencoded`) params with `form` macro
-* JSON (`Content-Type: application/json`) params with `json` macro
+- Path params with `path` macro
+- Query params with `query` macro
+- Form (`Content-Type: x-www-urlformencoded`) params with `form` macro
+- JSON (`Content-Type: application/json`) params with `json` macro
 
 A single endpoint can have params defined to parse from any of these sources (or even all four simultaneously).
 
@@ -150,13 +150,13 @@ A single endpoint can have params defined to parse from any of these sources (or
 
 `type` method cheatsheet (detailed information is in below sections):
 
-* The syntax is `type <param_name> : <param_type>( = <default_value>)`, for example, `type name : String = "John"`
-* Params are accessible with `params.<param_source>.<param_name>` getters, for example, `params.path.name`
-* The param type can be *nilable* (e.g. `type name : String?`), which means that if the parameter is absent in the request, the getter will return `nil` value
-* If the param type is *not nilable* **and** absent in the request, a 400 error is returned
-* If the param type has a `<default_value>` **and** absent in the request, the getter returns the default value
-* `query`, `form` and `json` params support nested, arrays and (*soon*) hash params
-* Parsing is powered by the [http-params-serializable](https://github.com/vladfaust/http-params-serializable) shard; all the options are passed to it as-is, for example `type from_time : Time, key: "from", converter: Time::EpochConverter`
+- The syntax is `type <param_name> : <param_type>( = <default_value>)`, for example, `type name : String = "John"`
+- Params are accessible with `params.<param_source>.<param_name>` getters, for example, `params.path.name`
+- The param type can be _nilable_ (e.g. `type name : String?`), which means that if the parameter is absent in the request, the getter will return `nil` value
+- If the param type is _not nilable_ **and** absent in the request, a 400 error is returned
+- If the param type has a `<default_value>` **and** absent in the request, the getter returns the default value
+- `query`, `form` and `json` params support nested, arrays and (_soon_) hash params
+- Parsing is powered by the [http-params-serializable](https://github.com/vladfaust/http-params-serializable) shard; all the options are passed to it as-is, for example `type from_time : Time, key: "from", converter: Time::EpochConverter`
 
 ### Path params
 
@@ -178,13 +178,13 @@ struct GetUser
 end
 ```
 
-In this example we've defined a *path parameter* named `id`. The endpoint would parse it from an incoming request's URI (in fact, it is parsed by the router internally, not the action itself). The route should look like this:
+In this example we've defined a _path parameter_ named `id`. The endpoint would parse it from an incoming request's URI (in fact, it is parsed by the router internally, not the action itself). The route should look like this:
 
 ```crystal
 Onyx::HTTP.get "/users/:id", GetUser
 ```
 
-Note the `:id` part. This is a *path parameter*. When doing a `GET /users/42/` request, the `id` equals to `42`. Therefore this line would print `42`:
+Note the `:id` part. This is a _path parameter_. When doing a `GET /users/42/` request, the `id` equals to `42`. Therefore this line would print `42`:
 
 ```crystal
   def call
@@ -232,7 +232,7 @@ In this example, the URL query is expected to contain `offset` and `limit` param
 "/?offset=10&limit=20"
 ```
 
-Note that `offset` type is `Int32?`. The `?` symbol expands to `Int32 | Nil`, which effectively means that the `offset` parameter is *nilable*. So queries `/?limit=20` and even `/?offset=&limit=20` are still valid and `params.query.offset` will be `nil`.
+Note that `offset` type is `Int32?`. The `?` symbol expands to `Int32 | Nil`, which effectively means that the `offset` parameter is _nilable_. So queries `/?limit=20` and even `/?offset=&limit=20` are still valid and `params.query.offset` will be `nil`.
 
 In contrary, `limit` type is `Int32` and it has a default value of `10`. That means that if the `limit` parameter is absent from a request query, `params.query.limit` will be equal to `10`.
 

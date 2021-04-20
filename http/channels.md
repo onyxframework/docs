@@ -1,13 +1,13 @@
 # Channels
 
-[Onyx::HTTP::Channel](https://api.onyxframework.org/http/Onyx/HTTP/Channel.html) module allows to conveniently bind to and handle websocket events. It **includes** the [Onyx::HTTP::Endpoint](/http/endpoint) module. It also has the following methods:
+[Onyx::HTTP::Channel](https://api.onyxframework.com/http/Onyx/HTTP/Channel.html) module allows to conveniently bind to and handle websocket events. It **includes** the [Onyx::HTTP::Endpoint](/http/endpoint) module. It also has the following methods:
 
-* `on_open` is invoked once on socket bind
-* `on_message(String)` is called everytime a new string message frame arrives
-* `on_binary(Bytes)` is called when a new binary message framew arrives
-* `on_ping(String)` is called on the ping frame
-* `on_pong(String)` is called on the pong frame
-* `on_close` is invoked when the socket is closed (including when a [error](#errors) is raised)
+- `on_open` is invoked once on socket bind
+- `on_message(String)` is called everytime a new string message frame arrives
+- `on_binary(Bytes)` is called when a new binary message framew arrives
+- `on_ping(String)` is called on the ping frame
+- `on_pong(String)` is called on the pong frame
+- `on_close` is invoked when the socket is closed (including when a [error](#errors) is raised)
 
 These are expected to be overridden in your channels:
 
@@ -38,8 +38,8 @@ Onyx::HTTP.ws "/echo", Echo
 
 Onyx::HTTP::Channel module includes some getters:
 
-* `context` to access the current [`HTTP::Server::Context`](https://crystal-lang.org/api/latest/HTTP/Server/Context.html)
-* `socket` to access the bound [`HTTP::WebSocket`](https://crystal-lang.org/api/latest/HTTP/WebSocket.html)
+- `context` to access the current [`HTTP::Server::Context`](https://crystal-lang.org/api/latest/HTTP/Server/Context.html)
+- `socket` to access the bound [`HTTP::WebSocket`](https://crystal-lang.org/api/latest/HTTP/WebSocket.html)
 
 ## Params
 
@@ -49,8 +49,8 @@ Channels also have the `.params` macro, which is equivalent to the [Endpoint's](
 
 Channels have the `.errors` macro which is also similar to the [Endpoint's](/http/endpoints#errors) with some differences:
 
-* Those errors which are expected to be raised when the requst is already upgraded to a websocket must have code in range 4000-4999 according to the [specification](https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent#Properties)
-* Errors raised when the request already upgraded are rendered within the channel itself, but still logged
+- Those errors which are expected to be raised when the requst is already upgraded to a websocket must have code in range 4000-4999 according to the [specification](https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent#Properties)
+- Errors raised when the request already upgraded are rendered within the channel itself, but still logged
 
 ### Example:
 

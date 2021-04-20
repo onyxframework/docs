@@ -152,23 +152,23 @@ Most of the times you'll get an understandable compilation-time error if a field
 
 Shard homepage: [crystal-lang/crystal-sqlite3](https://github.com/crystal-lang/crystal-sqlite3)
 
-Crystal type | SQLite3 type | Required converter
---- | --- | --- | ---
-Bool* | INTEGER
-Float | REAL
-Int | INTEGER
-Bytes | BLOB
-String | TEXT
-Time** | TEXT
-Nil | NULL
-Enumerable | TEXT | [SQLite3::Any](https://api.onyxframework.org/sql/Onyx/SQL/Converters/SQLite3/Any.html)
-Enum | INTEGER | [SQLite3::EnumInt](https://api.onyxframework.org/sql/Onyx/SQL/Converters/SQLite3/EnumInt.html)
-Enumerable(Enum) | TEXT | [SQLite3::EnumInt](https://api.onyxframework.org/sql/Onyx/SQL/Converters/SQLite3/EnumInt.html)
-Enum | TEXT | [SQLite3::EnumText](https://api.onyxframework.org/sql/Onyx/SQL/Converters/SQLite3/EnumText.html)
-Enumerable(Enum) | TEXT | [SQLite3::EnumText](https://api.onyxframework.org/sql/Onyx/SQL/Converters/SQLite3/EnumText.html)
-JSON* | TEXT | [SQLite3::JSON](https://api.onyxframework.org/sql/Onyx/SQL/Converters/SQLite3/JSON.html)
-UUID | BLOB | [SQLite3::UUIDBlob](https://api.onyxframework.org/sql/Onyx/SQL/Converters/SQLite3/UUIDBlob.html)
-UUID | TEXT | [SQLite3::UUIDText](https://api.onyxframework.org/sql/Onyx/SQL/Converters/SQLite3/UUIDBlob.html)
+| Crystal type     | SQLite3 type | Required converter                                                                               |
+| ---------------- | ------------ | ------------------------------------------------------------------------------------------------ |
+| Bool\*           | INTEGER      |
+| Float            | REAL         |
+| Int              | INTEGER      |
+| Bytes            | BLOB         |
+| String           | TEXT         |
+| Time\*\*         | TEXT         |
+| Nil              | NULL         |
+| Enumerable       | TEXT         | [SQLite3::Any](https://api.onyxframework.com/sql/Onyx/SQL/Converters/SQLite3/Any.html)           |
+| Enum             | INTEGER      | [SQLite3::EnumInt](https://api.onyxframework.com/sql/Onyx/SQL/Converters/SQLite3/EnumInt.html)   |
+| Enumerable(Enum) | TEXT         | [SQLite3::EnumInt](https://api.onyxframework.com/sql/Onyx/SQL/Converters/SQLite3/EnumInt.html)   |
+| Enum             | TEXT         | [SQLite3::EnumText](https://api.onyxframework.com/sql/Onyx/SQL/Converters/SQLite3/EnumText.html) |
+| Enumerable(Enum) | TEXT         | [SQLite3::EnumText](https://api.onyxframework.com/sql/Onyx/SQL/Converters/SQLite3/EnumText.html) |
+| JSON\*           | TEXT         | [SQLite3::JSON](https://api.onyxframework.com/sql/Onyx/SQL/Converters/SQLite3/JSON.html)         |
+| UUID             | BLOB         | [SQLite3::UUIDBlob](https://api.onyxframework.com/sql/Onyx/SQL/Converters/SQLite3/UUIDBlob.html) |
+| UUID             | TEXT         | [SQLite3::UUIDText](https://api.onyxframework.com/sql/Onyx/SQL/Converters/SQLite3/UUIDBlob.html) |
 
 \* `0` for `false`, `1` for `true`<br>
 \*\* Stored in [`SQLite3::DATE_FORMAT`](https://github.com/crystal-lang/crystal-sqlite3/blob/master/src/sqlite3.cr#L5)<br>
@@ -178,23 +178,23 @@ UUID | TEXT | [SQLite3::UUIDText](https://api.onyxframework.org/sql/Onyx/SQL/Con
 
 Shard homepage: [will/crystal-pg](https://github.com/will/crystal-pg)
 
-Crystal type | SQLite3 type | Required converter
---- | --- | --- | ---
-Bool | BOOLEAN
-Float32 | REAL
-Float64 | FLOAT8
-Int16 | SMALLINT | [PG::Any](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/Any.html)
-Int32 | INTEGER
-Int64 | BIGINT
-Bytes | BYTEA
-String | TEXT, CHAR etc.
-Time | TIME, TIMESTAMP etc.
-Nil | NULL
-Enumerable* | *varies* | [PG::Any](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/Any.html)
-Enum, Enumerable(Enum) | ENUM | [PG::Enum](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/Enum.html)
-JSON** | JSON | [PG::JSON](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/JSON.html)
-JSON** | JSONB | [PG::JSONB](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/JSONB.html)
-UUID | BLOB | [PG::UUID](https://api.onyxframework.org/sql/Onyx/SQL/Converters/PG/UUID.html)
+| Crystal type           | SQLite3 type         | Required converter                                                               |
+| ---------------------- | -------------------- | -------------------------------------------------------------------------------- |
+| Bool                   | BOOLEAN              |
+| Float32                | REAL                 |
+| Float64                | FLOAT8               |
+| Int16                  | SMALLINT             | [PG::Any](https://api.onyxframework.com/sql/Onyx/SQL/Converters/PG/Any.html)     |
+| Int32                  | INTEGER              |
+| Int64                  | BIGINT               |
+| Bytes                  | BYTEA                |
+| String                 | TEXT, CHAR etc.      |
+| Time                   | TIME, TIMESTAMP etc. |
+| Nil                    | NULL                 |
+| Enumerable\*           | _varies_             | [PG::Any](https://api.onyxframework.com/sql/Onyx/SQL/Converters/PG/Any.html)     |
+| Enum, Enumerable(Enum) | ENUM                 | [PG::Enum](https://api.onyxframework.com/sql/Onyx/SQL/Converters/PG/Enum.html)   |
+| JSON\*\*               | JSON                 | [PG::JSON](https://api.onyxframework.com/sql/Onyx/SQL/Converters/PG/JSON.html)   |
+| JSON\*\*               | JSONB                | [PG::JSONB](https://api.onyxframework.com/sql/Onyx/SQL/Converters/PG/JSONB.html) |
+| UUID                   | BLOB                 | [PG::UUID](https://api.onyxframework.com/sql/Onyx/SQL/Converters/PG/UUID.html)   |
 
 \* Actual type depends on enumerable type (e.g. `int[]` for `Array(Int32)`)<br>
 \*\* Any type with `#to_json` and `.from_json` method, e.g. [JSON::Serializable](https://crystal-lang.org/api/0.27.2/JSON/Serializable.html). Note that `Enumerable` (e.g. `Array(String)` or `Hash(String, String)`) won't work in this case, use custom serializable struct instead
@@ -274,7 +274,7 @@ INSERT INTO users (name) VALUES (?)
 
 ## Reference
 
-You may have noticed in the example above that mapping references is pretty intuitive as well.  A reference is determined by the type, i.e. the compiler knows that `Post` is an `Onyx::SQL::Model` too, so `type posts : Array(Post)` is treated as a reference instead of a field. For the sake of tutorial, here is reduced code from above:
+You may have noticed in the example above that mapping references is pretty intuitive as well. A reference is determined by the type, i.e. the compiler knows that `Post` is an `Onyx::SQL::Model` too, so `type posts : Array(Post)` is treated as a reference instead of a field. For the sake of tutorial, here is reduced code from above:
 
 ```sql
 CREATE TABLE users (
