@@ -31,3 +31,4 @@ FROM nginx:1.27.5-alpine-slim AS client
 RUN apk add --no-cache curl
 
 COPY --from=builder /app/.vuepress/dist /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/
